@@ -1,0 +1,248 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   Design tokens — mirrors the original :root palette exactly
+   --------------------------------------------------------------------------- */
+:root {
+  --bg-primary: #0d0d0d;
+  --bg-secondary: #141414;
+  --bg-card: #1a1a1a;
+  --border: #2a2a2a;
+  --text-primary: #f0f0f0;
+  --text-secondary: #888888;
+  --text-muted: #555555;
+  --accent: #d4d4d4;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: Syne, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  /* `clip`, not `hidden`: `hidden` would turn <body> into a scroll container,
+     which would become the nearest scroller for the sections and silently kill
+     the snapping declared on <html>. `clip` suppresses the same horizontal
+     overflow without creating one. */
+  overflow-x: clip;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* The original hides the text caret + disables selection globally, then
+   re-enables the caret for form controls only. */
+* {
+  caret-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input,
+textarea {
+  caret-color: #ffffff;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Fully hidden page scrollbar */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+html {
+  scrollbar-width: none;
+}
+body {
+  -ms-overflow-style: none;
+}
+
+/* Opt-in slim scrollbar (comment list) */
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Hero 3D canvas wrapper */
+.responsive-wrapper canvas {
+  display: block;
+}
+
+/* ---------------------------------------------------------------------------
+   Responsive container scale
+
+   A single ladder drives every section so they share the same left/right edge
+   at any viewport. Two flavours:
+
+     --page-gutter        symmetric gutters for centred sections
+     --page-pl/--page-pr  the design's left-weighted rhythm (hero + about)
+
+   `--page-max` only bites above 1520px; at the 1440px reference width and
+   below, every value resolves to what the layout already used.
+   --------------------------------------------------------------------------- */
+:root {
+  --page-max: 1520px;
+
+  /* small phone (<400px). Below `md` there is no side-by-side content, so the
+     asymmetric pair tracks the symmetric gutter and every section sits flush. */
+  --page-gutter: 16px;
+  --page-pl: var(--page-gutter);
+  --page-pr: var(--page-gutter);
+  --nav-gutter: 16px;
+}
+
+/* phone */
+@media (min-width: 400px) {
+  :root {
+    --page-gutter: 20px;
+    --nav-gutter: 20px;
+  }
+}
+
+/* large phone */
+@media (min-width: 640px) {
+  :root {
+    --page-gutter: 24px;
+  }
+}
+
+/* tablet — the desktop 120/60 rhythm leaves only 588px of content at 768px,
+   so the asymmetric gutters are relaxed for this band only. */
+@media (min-width: 768px) {
+  :root {
+    --page-gutter: 40px;
+    --page-pl: 56px;
+    --page-pr: 40px;
+    --nav-gutter: 60px;
+  }
+}
+
+/* laptop and up — the original desktop rhythm, unchanged */
+@media (min-width: 1024px) {
+  :root {
+    --page-gutter: 80px;
+    --page-pl: 120px;
+    --page-pr: 60px;
+  }
+}
+
+.page-shell,
+.page-shell-wide {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+}
+
+.page-shell {
+  padding-inline: var(--page-gutter);
+}
+
+.page-shell-wide {
+  padding-left: var(--page-pl);
+  padding-right: var(--page-pr);
+}
+
+/* ---------------------------------------------------------------------------
+   Full-viewport scroll snapping
+
+   Snapping is attached to the document scroller rather than a nested wrapper
+   because `smoothScrollTo`, the `Background` orb drift and the `#portfolio`
+   hash return all read `window.scrollY`. For that to keep working, nothing
+   between <html> and a section may be a scroll container — hence `overflow-x:
+   clip` on <body> and <main> instead of `hidden`.
+
+   `proximity`, not `mandatory`: Portfolio and Contact are taller than the
+   viewport at every breakpoint (Contact by 649px even at 1440px), and mandatory
+   snapping fights the user scrolling through an oversized section. `snap-stop:
+   always` still prevents a fast flick from skipping past a section.
+   --------------------------------------------------------------------------- */
+html {
+  scroll-snap-type: y proximity;
+}
+
+.snap-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* fallback for browsers without dynamic viewport units */
+  min-height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  /* Opacity only — never a transform. Chrome derives snap positions from the
+     *transformed* border box, so animating the slot itself drags its snap point
+     along with it: a slot leaving the viewport would both offset the landing
+     position and leave the outgoing section peeking into the next one. The
+     translate therefore lives on the inner wrapper, which has no snap role. */
+  transition: opacity 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.snap-section__inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  transition: transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Let a shorter section stretch to fill the snap slot so the gap below it can
+   never expose the top of the next one. */
+.snap-section__inner > * {
+  flex: 1 0 auto;
+}
+
+/* No modifier class is the pre-hydration and no-JS state: fully visible. */
+.snap-section.is-in {
+  opacity: 1;
+}
+
+.snap-section.is-in .snap-section__inner {
+  /* `none`, not `translateY(0)`: a resting transform would make this element a
+     containing block and trap Portfolio's `position: fixed` lightbox inside it. */
+  transform: none;
+}
+
+.snap-section.is-out {
+  opacity: 0;
+}
+
+.snap-section.is-out .snap-section__inner {
+  transform: translateY(28px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-snap-type: y proximity;
+  }
+
+  .snap-section {
+    transition: opacity 200ms linear;
+  }
+
+  .snap-section__inner,
+  .snap-section.is-out .snap-section__inner {
+    transition: none;
+    transform: none;
+  }
+}

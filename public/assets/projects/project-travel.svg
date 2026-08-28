@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-label="Nusantara preview">
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#12233d"/>
+      <stop offset="100%" stop-color="#050b14"/>
+    </linearGradient>
+    <radialGradient id="g4glow" cx="0.2" cy="0.15" r="0.8">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="g4grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="url(#g4)"/>
+  <rect width="800" height="500" fill="url(#g4grid)"/>
+  <rect width="800" height="500" fill="url(#g4glow)"/>
+  <g opacity="0.5">
+    <circle cx="660" cy="120" r="120" fill="#38bdf8" opacity="0.12"/>
+    <circle cx="120" cy="420" r="150" fill="#ffffff" opacity="0.05"/>
+  </g>
+  <g transform="translate(64 300)">
+    <rect x="0" y="-64" width="46" height="4" rx="2" fill="#38bdf8"/>
+    <text x="0" y="0" font-family="Syne, Segoe UI, sans-serif" font-size="62" font-weight="800" fill="#f5f5f5" letter-spacing="-2">Nusantara</text>
+    <text x="0" y="42" font-family="DM Mono, Consolas, monospace" font-size="20" fill="#ffffff" opacity="0.55">Travel Booking UI</text>
+  </g>
+</svg>
