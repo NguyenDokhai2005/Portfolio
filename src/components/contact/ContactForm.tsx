@@ -36,7 +36,7 @@ export default function ContactForm() {
         viewport={{ once: false }}
         transition={{ delay: 0.05 }}
       >
-        <h2 className="text-2xl md:text-3xl font-bold mb-3">Hubungi Saya</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-3">Get In Touch</h2>
         <p className="text-sm text-white/50 mb-7">
           Feel free to reach out if you want to collaborate, discuss ideas, or simply say
           hello.

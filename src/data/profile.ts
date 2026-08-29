@@ -1,24 +1,30 @@
 import type { NavItem } from '@/types';
 
 export const profile = {
-  name: 'Rifqi Muhammad Aliya',
-  nameLines: ['Rifqi', 'Muhammad', 'Aliya'],
-  brand: 'rifqi.dev',
-  role: ['Frontend', 'Developer'],
+  name: 'Nguyễn Đỗ Khải',
+  nameLines: ['Nguyễn', 'Đỗ Khải'],
+  brand: 'crust.dev',
+  role: ['Fullstack', 'Developer'],
   availability: '✦ Available for work',
-  typedRoles: ['Junior Programmer', 'fresh Graduate', 'Happy coding!'],
-  heroTags: ['Typescript', 'React.js', 'Tailwind'],
+  typedRoles: ['Fullstack Web Developer', 'IT Student — UTH', 'Happy coding!'],
+  heroTags: ['TypeScript', 'React', 'NestJS'],
   heroDescription:
-    'Menciptakan website modern dengan tampilan clean, responsif, dan elegan. Mengubah ide dan desain menjadi pengalaman digital yang menarik dan mudah digunakan.',
-  heroNotes: ['↓ explore my work below', '↗ open to full-time & freelance opportunities'],
+    'Building fullstack web products end to end — from a visual AI workflow builder to a realtime e-commerce platform and a blockchain Telegram mini app. Focused on clean architecture, responsive interfaces, and software that holds up in real use.',
+  heroNotes: [
+    '↓ explore my work below',
+    '↗ open to internship & full-time opportunities',
+  ],
   aboutDescription:
-    'Fresh Graduate SMK Rekayasa Perangkat Lunak lulusan 2026 dengan passion di bidang frontend development dan UI modern. Berfokus pada pembuatan website clean, responsif, dan visual yang kuat untuk menghadirkan pengalaman digital yang optimal.',
-  aboutQuote: '“Turning ideas into clean, modern, and meaningful digital experiences.”',
+    'Information Technology student at University of Transport Ho Chi Minh City, intake 2023, working as a fullstack web developer. I have led two team projects and built across React, Next.js, NestJS, PostgreSQL and Move smart contracts — covering web, mobile and on-chain.',
+  aboutQuote: '“From idea to shipped product — clean architecture, real problems, working software.”',
   avatar: '/assets/PP.png',
-  cvUrl:
-    'https://drive.google.com/file/d/1cFqZ0TY0U0I51K0Tchv8E4sbOv5yAZ9x/view?usp=drive_link',
-  siteLabel: 'www.rifqi.vercel.app',
-  copyright: '© 2026 Rifqi Muhammad Aliya — All rights reserved.',
+  /**
+   * Empty until a real CV is published. The About section hides the download
+   * button while this is blank rather than rendering a dead link.
+   */
+  cvUrl: '',
+  siteLabel: 'github.com/NguyenDokhai2005',
+  copyright: '© 2026 Nguyễn Đỗ Khải — All rights reserved.',
 } as const;
 
 export const navItems: NavItem[] = [

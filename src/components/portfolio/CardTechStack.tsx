@@ -6,9 +6,16 @@ interface CardTechStackProps {
   index: number;
   name: string;
   logoUrl?: string;
+  /** Flips solid-black devicon logos so they read on the dark tile. */
+  invert?: boolean;
 }
 
-export default function CardTechStack({ index, name, logoUrl }: CardTechStackProps) {
+export default function CardTechStack({
+  index,
+  name,
+  logoUrl,
+  invert = false,
+}: CardTechStackProps) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -24,7 +31,7 @@ export default function CardTechStack({ index, name, logoUrl }: CardTechStackPro
           <img
             src={logoUrl}
             alt={name}
-            className="relative z-10 w-[56px] h-[56px] object-contain"
+            className={`relative z-10 w-[56px] h-[56px] object-contain${invert ? ' invert' : ''}`}
           />
         ) : (
           <div className="relative z-10 w-[56px] h-[56px] rounded-2xl bg-white/10" />

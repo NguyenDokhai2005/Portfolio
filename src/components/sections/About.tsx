@@ -86,7 +86,10 @@ export default function About() {
                 style={{
                   fontSize: 'clamp(32px, 5vw, 46px)',
                   fontWeight: 800,
-                  lineHeight: 1.03,
+                  /* 1.03 was fine for undecorated Latin, but Vietnamese stacks
+                     marks above the cap height (ễ, ỗ, ả), so the tops were being
+                     clipped and colliding with the line above. */
+                  lineHeight: 1.24,
                   color: 'var(--text-primary)',
                 }}
               >
@@ -136,6 +139,9 @@ export default function About() {
               variants={blurUpItem}
               style={{ display: 'flex', gap: 10, marginTop: 18, flexWrap: 'wrap' }}
             >
+              {/* Rendered only when a CV URL exists — an empty href would
+                  reload the page instead of downloading anything. */}
+              {profile.cvUrl ? (
               <a
                 href={profile.cvUrl}
                 target="_blank"
@@ -171,6 +177,7 @@ export default function About() {
                   Download CV
                 </button>
               </a>
+              ) : null}
 
               <button
                 type="button"

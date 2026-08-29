@@ -9,22 +9,19 @@ import { fileURLToPath } from 'node:url';
 const here = dirname(fileURLToPath(import.meta.url));
 const publicDir = join(here, '..', 'public', 'assets');
 
+/** Whoever the site belongs to — printed on the certificate stand-ins. */
+const OWNER = 'Nguyễn Đỗ Khải';
+
 const projects = [
-  { file: 'project-portfolio.svg', label: 'Portfolio', sub: 'Next.js · Three.js', from: '#1f2937', to: '#0b1120', accent: '#60a5fa' },
-  { file: 'project-portfolio-2.svg', label: 'Portfolio', sub: 'Lanyard · Physics', from: '#111827', to: '#0a0a0a', accent: '#a78bfa' },
-  { file: 'project-coffee.svg', label: 'Kanto', sub: 'Coffee Shop Landing', from: '#3b2418', to: '#140c07', accent: '#f59e0b' },
-  { file: 'project-dashboard.svg', label: 'SIAKAD', sub: 'School Dashboard', from: '#0f2a2a', to: '#04100f', accent: '#2dd4bf' },
-  { file: 'project-travel.svg', label: 'Nusantara', sub: 'Travel Booking UI', from: '#12233d', to: '#050b14', accent: '#38bdf8' },
-  { file: 'project-notes.svg', label: 'Lumen', sub: 'Notes & Tasks', from: '#2a1f3d', to: '#0d0714', accent: '#c084fc' },
-  { file: 'project-blog.svg', label: 'Aksara', sub: 'Blog Platform', from: '#2b1520', to: '#12060b', accent: '#fb7185' },
+  { file: 'project-ai-workflow.svg', label: 'AI-WorkFlow', sub: 'Workflow Automation Platform', from: '#1b2440', to: '#070a14', accent: '#7c8cff' },
+  { file: 'project-cedra-pocket.svg', label: 'Cedra-Pocket', sub: 'Blockchain Telegram Mini App', from: '#2a2413', to: '#0d0b05', accent: '#f0b429' },
+  { file: 'project-expense.svg', label: 'Expense', sub: 'Personal Finance · OCR', from: '#0f2a1f', to: '#04100b', accent: '#34d399' },
+  { file: 'project-softstore.svg', label: 'SoftStore', sub: 'E-commerce Platform', from: '#2b1520', to: '#12060b', accent: '#fb7185' },
+  { file: 'project-rental-car.svg', label: 'Rental Car', sub: 'Management Dashboard', from: '#0f2a2a', to: '#04100f', accent: '#2dd4bf' },
 ];
 
 const certificates = [
-  { file: 'certificate-web.svg', title: 'Dasar Pemrograman Web', accent: '#f59e0b' },
-  { file: 'certificate-frontend.svg', title: 'Front-End Web Pemula', accent: '#38bdf8' },
-  { file: 'certificate-react.svg', title: 'React.js Fundamentals', accent: '#22d3ee' },
-  { file: 'certificate-responsive.svg', title: 'Responsive Web Design', accent: '#a78bfa' },
-  { file: 'certificate-rpl.svg', title: 'Uji Kompetensi RPL', accent: '#34d399' },
+  { file: 'certificate-binance.svg', title: 'Binance', accent: '#f0b429' },
 ];
 
 const escape = (value) =>
@@ -78,7 +75,7 @@ function certificateSvg({ title, accent }, index) {
   <path d="M382 150l14 14 24-28" fill="none" stroke="${accent}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
   <text x="400" y="268" text-anchor="middle" font-family="DM Mono, Consolas, monospace" font-size="16" fill="#ffffff" opacity="0.45" letter-spacing="6">CERTIFICATE</text>
   <text x="400" y="330" text-anchor="middle" font-family="Syne, Segoe UI, sans-serif" font-size="36" font-weight="700" fill="#f0f0f0">${escape(title)}</text>
-  <text x="400" y="378" text-anchor="middle" font-family="Syne, Segoe UI, sans-serif" font-size="20" fill="#ffffff" opacity="0.55">Rifqi Muhammad Aliya</text>
+  <text x="400" y="378" text-anchor="middle" font-family="Syne, Segoe UI, sans-serif" font-size="20" fill="#ffffff" opacity="0.55">${escape(OWNER)}</text>
   <rect x="300" y="428" width="200" height="2" rx="1" fill="#ffffff" opacity="0.2"/>
   <text x="400" y="462" text-anchor="middle" font-family="DM Mono, Consolas, monospace" font-size="13" fill="#ffffff" opacity="0.35">Verified completion</text>
 </svg>

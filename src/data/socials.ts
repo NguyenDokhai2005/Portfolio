@@ -1,11 +1,5 @@
 import type { IconType } from 'react-icons';
-import {
-  FaGithub,
-  FaInstagram,
-  FaLinkedinIn,
-  FaTiktok,
-  FaYoutube,
-} from 'react-icons/fa';
+import { FaEnvelope, FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
 export interface SocialLink {
   title: string;
@@ -17,34 +11,24 @@ export interface SocialLink {
 /** Rendered as a full-width card above the 2-column grid. */
 export const primarySocial: SocialLink = {
   title: 'LinkedIn',
-  user: '@linkedin',
+  user: 'Khải Nguyễn Đỗ',
   icon: FaLinkedinIn,
-  link: 'https://www.linkedin.com/in/rifqimuhammadaliya/',
+  // Percent-encoded: the vanity slug contains Vietnamese diacritics, which some
+  // clients mangle when the raw characters are placed in an href.
+  link: 'https://www.linkedin.com/in/kh%E1%BA%A3i-nguy%E1%BB%85n-%C4%91%E1%BB%97-073821376/',
 };
 
 export const socialLinks: SocialLink[] = [
   {
-    title: 'Instagram',
-    user: '@instagram',
-    icon: FaInstagram,
-    link: 'https://www.instagram.com/itsmeikky_12?igsh=ZHFpMTJ1bHQzeDAx',
-  },
-  {
-    title: 'Youtube',
-    user: '@youtube',
-    icon: FaYoutube,
-    link: 'https://youtube.com/@zettaajah?si=QRjJGD4zCQG8aIHX',
-  },
-  {
-    title: 'Github',
-    user: '@github',
+    title: 'GitHub',
+    user: '@NguyenDokhai2005',
     icon: FaGithub,
-    link: 'https://github.com/RifqiMuhammadAliya12',
+    link: 'https://github.com/NguyenDokhai2005',
   },
   {
-    title: 'TikTok',
-    user: '@tiktok',
-    icon: FaTiktok,
-    link: 'https://www.tiktok.com/@itsme.ikky_?_r=1&_t=ZS-95yAYr5PHUb',
+    title: 'Email',
+    user: 'nguyendokhai.030105@gmail.com',
+    icon: FaEnvelope,
+    link: 'mailto:nguyendokhai.030105@gmail.com',
   },
 ];

@@ -211,6 +211,7 @@ export default function Portfolio() {
                         index={index}
                         name={tech.name}
                         logoUrl={tech.logo_url}
+                        invert={tech.invert}
                       />
                     ))}
                 </div>

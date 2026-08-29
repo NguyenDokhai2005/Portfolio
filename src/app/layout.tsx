@@ -3,8 +3,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Rifqi Muhammad Aliya',
-  description: 'Portfolio...',
+  title: 'Nguyễn Đỗ Khải — Fullstack Web Developer',
+  description:
+    'Portfolio of Nguyễn Đỗ Khải (Crust) — fullstack web developer working with React, Next.js, NestJS, PostgreSQL and Move smart contracts.',
   icons: {
     icon: '/favicon.ico',
   },

@@ -24,6 +24,8 @@ export interface TechStackItem {
   id: string;
   name: string;
   logo_url: string;
+  /** Set for logos devicon ships in solid black, which vanish on dark tiles. */
+  invert?: boolean;
   created_at?: string;
 }
 

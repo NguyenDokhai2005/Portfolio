@@ -22,6 +22,23 @@ const OUT = path.join(ROOT, 'public/assets/kartu-texture.png');
 /** Photo slot inside the atlas, measured from the original texture's edges. */
 const SLOT = { left: 17, top: 23, width: 218, height: 344, radius: 7 };
 
+/** Name printed on the card's reverse face. */
+const NAME = 'NGUYỄN ĐỖ KHẢI';
+
+/**
+ * The label band on the back face. The baked-in name occupies x 330–438,
+ * y 323–345; this band is wider so a longer name still centres on the panel
+ * (which spans x 269–497).
+ *
+ * `bgTop` is an equally tall, unprinted band lower down the same columns. The
+ * backdrop is a purely horizontal gradient — measured constant down every
+ * column — so copying that block up repaints the label area seamlessly. It is
+ * copied at full size on purpose: resizing a 1px-tall row up to the band height
+ * makes libvips collapse the horizontal gradient to its mean (~233), which
+ * leaves a visible flat rectangle.
+ */
+const LABEL = { left: 283, top: 316, width: 200, height: 36, baseline: 29, bgTop: 353 };
+
 /** Pulls the embedded baseColor PNG out of the .glb binary chunk. */
 function extractAtlas(glbPath) {
   const glb = readFileSync(glbPath);
@@ -77,8 +94,32 @@ const photo = await sharp(PORTRAIT)
   .png()
   .toBuffer();
 
+// Repaint the label band from a clean row of the same gradient, erasing the
+// name that ships baked into the model.
+const labelBackground = await sharp(atlas)
+  .extract({
+    left: LABEL.left,
+    top: LABEL.bgTop,
+    width: LABEL.width,
+    height: LABEL.height,
+  })
+  .png()
+  .toBuffer();
+
+const nameLabel = Buffer.from(
+  `<svg width="${LABEL.width}" height="${LABEL.height}" xmlns="http://www.w3.org/2000/svg">` +
+    `<text x="${LABEL.width / 2}" y="${LABEL.baseline}" text-anchor="middle" ` +
+    `font-family="Segoe UI, DejaVu Sans, Arial, sans-serif" font-size="21" ` +
+    `font-weight="700" letter-spacing="0.6" fill="#1f1f1f">${NAME}</text>` +
+    `</svg>`,
+);
+
 const composed = await sharp(atlas)
-  .composite([{ input: photo, left: SLOT.left, top: SLOT.top }])
+  .composite([
+    { input: photo, left: SLOT.left, top: SLOT.top },
+    { input: labelBackground, left: LABEL.left, top: LABEL.top },
+    { input: nameLabel, left: LABEL.left, top: LABEL.top },
+  ])
   .png({ compressionLevel: 9 })
   .toBuffer();
 
