@@ -11,7 +11,7 @@ export interface SocialLink {
 /** Rendered as a full-width card above the 2-column grid. */
 export const primarySocial: SocialLink = {
   title: 'LinkedIn',
-  user: 'Khải Nguyễn Đỗ',
+  user: 'Khai Nguyen Do',
   icon: FaLinkedinIn,
   // Percent-encoded: the vanity slug contains Vietnamese diacritics, which some
   // clients mangle when the raw characters are placed in an href.

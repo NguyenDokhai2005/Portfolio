@@ -10,7 +10,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const publicDir = join(here, '..', 'public', 'assets');
 
 /** Whoever the site belongs to — printed on the certificate stand-ins. */
-const OWNER = 'Nguyễn Đỗ Khải';
+const OWNER = 'Nguyen Do Khai';
 
 const projects = [
   { file: 'project-ai-workflow.svg', label: 'AI-WorkFlow', sub: 'Workflow Automation Platform', from: '#1b2440', to: '#070a14', accent: '#7c8cff' },

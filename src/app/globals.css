@@ -246,3 +246,63 @@ html {
     transform: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Tech marquee
+
+   The track renders its list twice and slides exactly half its own width, so at
+   the moment the animation resets, copy two sits precisely where copy one
+   started and the seam is invisible.
+
+   Spacing is `margin-inline-end` on every item rather than flex `gap`: with
+   `gap`, a track of 2N items measures `2N items + (2N-1) gaps`, so half of that
+   falls half a gap short of one whole copy and the loop visibly jumps. Giving
+   each item a trailing margin — including the last — makes the track exactly
+   `2N × (item + gap)` wide, which halves cleanly.
+   --------------------------------------------------------------------------- */
+.tech-marquee {
+  overflow: hidden;
+  /* Fade both ends so items enter and leave rather than popping at the edge. */
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.tech-marquee__track {
+  display: flex;
+  width: max-content;
+  animation-name: tech-marquee-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.tech-marquee__item {
+  margin-inline-end: var(--tech-marquee-gap);
+  flex: none;
+}
+
+/* Hold still while the pointer is over the row so the labels can be read. */
+.tech-marquee:hover .tech-marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes tech-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-marquee {
+    mask-image: none;
+    -webkit-mask-image: none;
+    /* Motion is off, so hand scrolling back to the user instead. */
+    overflow-x: auto;
+  }
+
+  .tech-marquee__track {
+    animation: none;
+  }
+}

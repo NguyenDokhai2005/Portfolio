@@ -1,8 +1,14 @@
 import type { NavItem } from '@/types';
 
 export const profile = {
-  name: 'Nguyễn Đỗ Khải',
-  nameLines: ['Nguyễn', 'Đỗ Khải'],
+  /**
+   * Written without diacritics on purpose: neither Syne nor DM Mono serves
+   * ễ U+1EC5, ỗ U+1ED7 or ả U+1EA3, so the browser substitutes a fallback family
+   * for just those letters and the name renders in two fonts mid-word. Verify
+   * with `node scripts/check-font-vietnamese.mjs` before restoring the accents.
+   */
+  name: 'Nguyen Do Khai',
+  nameLines: ['Nguyen', 'Do Khai'],
   brand: 'crust.dev',
   role: ['Fullstack', 'Developer'],
   availability: '✦ Available for work',
@@ -24,7 +30,7 @@ export const profile = {
    */
   cvUrl: '',
   siteLabel: 'github.com/NguyenDokhai2005',
-  copyright: '© 2026 Nguyễn Đỗ Khải — All rights reserved.',
+  copyright: '© 2026 Nguyen Do Khai — All rights reserved.',
 } as const;
 
 export const navItems: NavItem[] = [

@@ -5,8 +5,9 @@ import { ChevronDown, ChevronUp, X } from 'lucide-react';
 import { useState } from 'react';
 
 import CardCertificate from '@/components/portfolio/CardCertificate';
+import CardExperience from '@/components/portfolio/CardExperience';
 import CardProject from '@/components/portfolio/CardProject';
-import CardTechStack from '@/components/portfolio/CardTechStack';
+import { experience } from '@/data/experience';
 import { usePortfolioData } from '@/hooks/usePortfolioData';
 import { EASE } from '@/lib/motion';
 import type { PortfolioTab } from '@/types';
@@ -14,14 +15,14 @@ import type { PortfolioTab } from '@/types';
 const TABS: { key: PortfolioTab; label: string }[] = [
   { key: 'projects', label: 'Projects' },
   { key: 'certificates', label: 'Certificates' },
-  { key: 'techstack', label: 'Tech Stack' },
+  { key: 'experience', label: 'Experience' },
 ];
 
 /** Projects collapse to the first three until "See More" is pressed. */
 const COLLAPSED_PROJECT_COUNT = 3;
 
 export default function Portfolio() {
-  const { projects, certificates, techStacks, loading } = usePortfolioData();
+  const { projects, certificates, loading } = usePortfolioData();
   const [activeTab, setActiveTab] = useState<PortfolioTab>('projects');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState('');
@@ -79,7 +80,7 @@ export default function Portfolio() {
         >
           <h1 className="text-3xl md:text-5xl font-bold mb-3">Portfolio Showcase</h1>
           <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">
-            Explore my journey through projects, certifications, and technical expertise.
+            Explore my journey through projects, certifications, and experience.
           </p>
         </motion.div>
 
@@ -201,19 +202,12 @@ export default function Portfolio() {
               </div>
             )}
 
-            {activeTab === 'techstack' && (
+            {activeTab === 'experience' && (
               <div className="min-h-[360px] flex justify-center">
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 max-w-5xl w-full">
-                  {!loading &&
-                    techStacks.map((tech, index) => (
-                      <CardTechStack
-                        key={tech.id}
-                        index={index}
-                        name={tech.name}
-                        logoUrl={tech.logo_url}
-                        invert={tech.invert}
-                      />
-                    ))}
+                <div className="grid md:grid-cols-2 gap-6 max-w-5xl w-full px-1">
+                  {experience.map((item, index) => (
+                    <CardExperience key={item.id} index={index} {...item} />
+                  ))}
                 </div>
               </div>
             )}

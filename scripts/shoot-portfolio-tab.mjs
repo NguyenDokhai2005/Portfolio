@@ -1,16 +1,17 @@
 /**
- * Opens the Portfolio "Tech Stack" tab and screenshots the grid, so the devicon
- * logos can be checked for readability — several ship as solid black and rely on
- * the `invert` flag to show up on the dark tiles.
+ * Opens a Portfolio tab by its visible label and screenshots the panel, also
+ * reporting any image inside it that failed to load.
  *
- * Run: node scripts/shoot-tech-stack.mjs [origin]
+ * Run: node scripts/shoot-portfolio-tab.mjs [tabLabel] [origin]
+ * e.g. node scripts/shoot-portfolio-tab.mjs Experience
  */
 import { spawn } from 'node:child_process';
 import { existsSync, mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-const ORIGIN = process.argv[2] ?? 'http://localhost:3211';
+const TAB_LABEL = process.argv[2] ?? 'Experience';
+const ORIGIN = process.argv[3] ?? 'http://localhost:3211';
 const PORT = 9343;
 
 const CHROME = [
@@ -102,36 +103,43 @@ await evaluate(
   `document.getElementById('portfolio').scrollIntoView({ behavior: 'instant', block: 'start' })`,
 );
 await wait(800);
-const clicked = await evaluate(
-  `Boolean([...document.querySelectorAll('button')]
-     .find(b => b.textContent.trim() === 'Tech Stack')
-     ?.click() ?? true)`,
-);
+const clicked = await evaluate(`(() => {
+  const button = [...document.querySelectorAll('#portfolio button')]
+    .find((b) => b.textContent.trim() === ${JSON.stringify(TAB_LABEL)});
+  if (!button) return false;
+  button.click();
+  return true;
+})()`);
 await wait(2600);
 
-// Report any logo that renders too dark to see, measured from the live DOM.
 const audit = await evaluate(`(() => {
-  const imgs = [...document.querySelectorAll('#portfolio img')];
-  return imgs.map((img) => ({
-    name: img.alt,
-    inverted: img.className.includes('invert'),
-    loaded: img.complete && img.naturalWidth > 0,
-  }));
+  const panel = document.querySelector('#portfolio');
+  const imgs = [...panel.querySelectorAll('img')];
+  return {
+    cardCount: panel.querySelectorAll('h3').length,
+    images: imgs.map((img) => ({
+      name: img.alt || img.getAttribute('src'),
+      loaded: img.complete && img.naturalWidth > 0,
+    })),
+  };
 })()`);
 
+const slug = TAB_LABEL.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+const file = `.tmp-tab-${slug}.png`;
 const shot = await send('Page.captureScreenshot', { format: 'png' }, sessionId);
-writeFileSync('.tmp-tech-stack.png', Buffer.from(shot.data, 'base64'));
+writeFileSync(file, Buffer.from(shot.data, 'base64'));
 
-console.log(`tab clicked: ${clicked}`);
-const broken = audit.filter((a) => !a.loaded);
-console.log(`${audit.length} logos; inverted: ${audit.filter((a) => a.inverted).length}`);
+const broken = audit.images.filter((a) => !a.loaded);
+console.log(`tab "${TAB_LABEL}" clicked: ${clicked}`);
+console.log(`headings in panel: ${audit.cardCount}`);
+console.log(`images: ${audit.images.length}`);
 console.log(
   broken.length === 0
-    ? 'all logos loaded'
+    ? 'all images loaded'
     : `FAILED TO LOAD: ${broken.map((b) => b.name).join(', ')}`,
 );
-console.log('wrote .tmp-tech-stack.png');
+console.log(`wrote ${file}`);
 
 socket.close();
 chrome.kill();
-process.exit(broken.length === 0 ? 0 : 1);
+process.exit(clicked && broken.length === 0 ? 0 : 1);

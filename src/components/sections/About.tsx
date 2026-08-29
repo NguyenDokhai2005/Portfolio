@@ -5,7 +5,10 @@ import { ArrowUpRight, Award, Code, FileText, Globe } from 'lucide-react';
 import Image from 'next/image';
 import type { ReactNode } from 'react';
 
+import LightRibbon from '@/components/ui/LightRibbon';
+import TechMarquee from '@/components/ui/TechMarquee';
 import { profile } from '@/data/profile';
+import { techStack } from '@/data/techStack';
 import { usePortfolioCounts } from '@/hooks/usePortfolioData';
 import { blurUpItem, containerStagger, popCard, slideInRight } from '@/lib/motion';
 import { scrollToPortfolio } from '@/lib/scroll';
@@ -15,6 +18,15 @@ interface StatCard {
   value: string;
   title: string;
 }
+
+/**
+ * Split in half so the two marquee rows carry a balanced number of logos. The
+ * seed list is ordered frontend → backend → mobile → tooling, so halving it also
+ * groups the rows sensibly rather than scattering them.
+ */
+const MARQUEE_SPLIT = Math.ceil(techStack.length / 2);
+const techRowOne = techStack.slice(0, MARQUEE_SPLIT);
+const techRowTwo = techStack.slice(MARQUEE_SPLIT);
 
 export default function About() {
   const { projectCount, certificateCount } = usePortfolioCounts();
@@ -34,9 +46,15 @@ export default function About() {
       id="about"
       className="pt-[60px] md:pt-20 pb-[30px]"
       style={{
+        // A column so the light band can sit outside `.page-shell-wide` and run
+        // the full viewport width. The shell keeps its own max-width and its
+        // asymmetric gutters, which is why a negative margin could not be used
+        // to break the band out from inside it.
         minHeight: '100dvh',
         display: 'flex',
-        alignItems: 'flex-start',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        justifyContent: 'flex-start',
       }}
     >
       <div className="page-shell-wide">
@@ -86,10 +104,7 @@ export default function About() {
                 style={{
                   fontSize: 'clamp(32px, 5vw, 46px)',
                   fontWeight: 800,
-                  /* 1.03 was fine for undecorated Latin, but Vietnamese stacks
-                     marks above the cap height (ễ, ỗ, ả), so the tops were being
-                     clipped and colliding with the line above. */
-                  lineHeight: 1.24,
+                  lineHeight: 1.06,
                   color: 'var(--text-primary)',
                 }}
               >
@@ -304,7 +319,42 @@ export default function About() {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* The tech stack, moved out of the Portfolio tabs. The two rows travel in
+            opposite directions so the pair reads as continuous motion rather than
+            one wide slab sliding sideways. */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, margin: '-60px' }}
+          transition={{ duration: 0.8 }}
+          className="mt-10 space-y-3.5"
+        >
+          <TechMarquee
+            items={techRowOne}
+            direction="left"
+            label="Technologies I work with, first row"
+          />
+          <TechMarquee
+            items={techRowTwo}
+            direction="right"
+            label="Technologies I work with, second row"
+          />
+        </motion.div>
       </div>
+
+      {/* Outside the shell, so the band spans the whole viewport instead of the
+          content column. Switch `palette` to "spectrum" for the reference's
+          blues and violets. */}
+      <motion.div
+        initial={{ opacity: 0, y: 26 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, margin: '-60px' }}
+        transition={{ duration: 0.85 }}
+        className="mt-4"
+      >
+        <LightRibbon palette="mono" />
+      </motion.div>
     </section>
   );
 }

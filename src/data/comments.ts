@@ -7,7 +7,7 @@ import type { Comment } from '@/types';
 export const seedComments: Comment[] = [
   {
     id: 'c-01',
-    name: 'Khải',
+    name: 'Khai',
     comment: 'Welcome! Leave a message, a question, or any feedback here.',
     likes: 0,
     is_pinned: true,

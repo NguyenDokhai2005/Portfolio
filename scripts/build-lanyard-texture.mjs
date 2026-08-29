@@ -22,8 +22,11 @@ const OUT = path.join(ROOT, 'public/assets/kartu-texture.png');
 /** Photo slot inside the atlas, measured from the original texture's edges. */
 const SLOT = { left: 17, top: 23, width: 218, height: 344, radius: 7 };
 
-/** Name printed on the card's reverse face. */
-const NAME = 'NGUYỄN ĐỖ KHẢI';
+/**
+ * Name printed on the card's reverse face. Kept diacritic-free to match the
+ * name shown in the DOM, where the webfonts lack the Vietnamese glyphs.
+ */
+const NAME = 'NGUYEN DO KHAI';
 
 /**
  * The label band on the back face. The baked-in name occupies x 330–438,

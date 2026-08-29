@@ -44,4 +44,18 @@ export interface NavItem {
   id: string;
 }
 
-export type PortfolioTab = 'projects' | 'certificates' | 'techstack';
+export interface ExperienceItem {
+  id: string;
+  role: string;
+  organization: string;
+  /**
+   * Only set where a real date is known. The card omits the badge otherwise
+   * rather than showing a guessed range.
+   */
+  period?: string;
+  kind: 'leadership' | 'development' | 'education';
+  summary: string;
+  highlights: string[];
+}
+
+export type PortfolioTab = 'projects' | 'certificates' | 'experience';
