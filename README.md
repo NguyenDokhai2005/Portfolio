@@ -1,7 +1,6 @@
-# Rifqi Portfolio — Next.js Clone
+# Nguyen Do Khai — Portfolio
 
-A pixel-accurate reconstruction of [portofolio-rho-sand-92.vercel.app](https://portofolio-rho-sand-92.vercel.app/),
-rebuilt as an organized Next.js App Router project.
+A modern, interactive portfolio website showcasing my projects, skills, and professional experience. Built with cutting-edge web technologies and featuring smooth animations, 3D graphics, and a unique visual design.
 
 ## Stack
 
@@ -14,8 +13,16 @@ rebuilt as an organized Next.js App Router project.
 | 3D | three.js · @react-three/fiber · drei · rapier · meshline |
 | Icons | lucide-react (UI) · react-icons (brands) |
 
-Tailwind v3 is deliberate: the original ships v3 utility syntax such as
-`bg-[size:26px_26px]` and `bg-white/[0.04]`, which v4 renames.
+Tailwind v3 powers the entire styling layer with custom design tokens and utility-first approach.
+
+## Features
+
+- **Interactive 3D Elements**: Physics-driven lanyard badge and animated light ribbon using Canvas 2D
+- **Smooth Animations**: Framer Motion powers page transitions, scroll reveals, and micro-interactions
+- **Responsive Design**: Optimized for all devices from mobile to desktop
+- **Project Showcase**: Tabbed portfolio section with project details and certificates
+- **Contact Integration**: Direct messaging form with social media links
+- **Performance Optimized**: Built with Next.js 16 and Turbopack for blazing-fast development
 
 ## Getting started
 
@@ -37,103 +44,93 @@ src/
 │   └── portfolio/[id]/page.tsx      # project detail route
 ├── components/
 │   ├── layout/
-│   │   ├── Background.tsx           # scroll-driven blurred orbs + 26px grid
-│   │   ├── Navbar.tsx               # scroll spy, delayed reveal, mobile sheet
-│   │   └── WelcomeScreen.tsx        # full-screen intro
+│   │   ├── Background.tsx           # Animated background orbs with grid overlay
+│   │   ├── Navbar.tsx               # Responsive navigation with scroll spy
+│   │   └── WelcomeScreen.tsx        # Animated intro screen
 │   ├── sections/
-│   │   ├── Hero.tsx                 # headline reveal + 3D lanyard slot
-│   │   ├── About.tsx                # bio, CV button, stat cards
-│   │   ├── Portfolio.tsx            # tabbed showcase + certificate lightbox
-│   │   └── Contact.tsx              # form + comments grid + footer
-│   ├── portfolio/                   # CardProject / CardCertificate / CardTechStack
-│   ├── contact/                     # ContactForm / Comments
+│   │   ├── Hero.tsx                 # Landing section with 3D lanyard
+│   │   ├── About.tsx                # Bio, stats, and LightRibbon canvas animation
+│   │   ├── Portfolio.tsx            # Projects, certificates, and experience tabs
+│   │   └── Contact.tsx              # Contact form with social links
+│   ├── portfolio/                   # Project and certificate card components
+│   ├── contact/                     # Contact form component
 │   └── ui/
-│       ├── Lanyard.tsx              # physics-driven badge on a mesh-line strap
-│       └── TextType.tsx             # typewriter with GSAP blinking cursor
-├── data/                            # profile, projects, certificates, techStack, comments, socials
-├── hooks/                           # useIsMobile, usePortfolioData, useComments
-├── lib/                             # motion tokens (EASE, variants), scroll helpers
-└── types/                           # shared interfaces
+│       ├── Lanyard.tsx              # 3D physics-based badge with mesh-line strap
+│       ├── LightRibbon.tsx          # Canvas 2D animated light filaments
+│       └── TextType.tsx             # Typewriter effect with GSAP cursor
+├── data/                            # Static content: profile, projects, certificates, tech stack
+├── hooks/                           # Custom React hooks for data and responsive behavior
+├── lib/                             # Utilities: motion configs, scroll helpers
+└── types/                           # TypeScript type definitions
 ```
 
-## Design tokens
+## Design system
 
-Lifted verbatim from the original `:root`:
+Custom design tokens defining the visual language:
 
-| Token | Value |
+| Token | Value | Usage |
+| --- | --- | --- |
+| `--bg-primary` | `#0d0d0d` | Main background |
+| `--bg-secondary` | `#141414` | Section backgrounds |
+| `--bg-card` | `#1a1a1a` | Card surfaces |
+| `--border` | `#2a2a2a` | Borders and dividers |
+| `--text-primary` | `#f0f0f0` | Primary text |
+| `--text-secondary` | `#888888` | Secondary text |
+| `--text-muted` | `#555555` | Muted text |
+| `--accent` | `#d4d4d4` | Accent elements |
+
+**Typography**: **Syne** (400–800) for headings and body text, **DM Mono** (300–500) for technical labels and navigation.
+
+## Key interactions
+
+- **Welcome sequence**: Animated intro screen plays once per session, stored in `sessionStorage`
+- **Smooth scrolling**: Custom 1.2s ease-in-out-cubic scroll animation for anchor navigation
+- **Scroll spy navigation**: Active section highlighting when scrolled past 140px threshold
+- **3D lanyard**: Physics-driven badge with rope joints and mesh-line strap (desktop only)
+- **Tab animations**: Smooth transitions with sliding background indicator and spring physics
+- **Responsive behavior**: Adaptive layouts and SSR-safe mobile detection
+
+## Content management
+
+Portfolio data is structured in TypeScript files under `src/data/`:
+
+- **Projects**: Showcase of development work with technologies, descriptions, and links
+- **Certificates**: Professional certifications and achievements
+- **Tech Stack**: Skills and technologies organized by category
+- **Social Links**: Contact information and social media profiles
+
+To integrate a backend (e.g., Supabase, Firebase), update these hooks:
+
+- `src/hooks/usePortfolioData.ts` → Fetch projects, certificates, tech stack
+- `src/hooks/useComments.ts` → Handle comment submission and likes
+- `src/data/projects.ts` → `getProjectById` for detail pages
+
+## Assets
+
+| Path | Description |
 | --- | --- |
-| `--bg-primary` | `#0d0d0d` |
-| `--bg-secondary` | `#141414` |
-| `--bg-card` | `#1a1a1a` |
-| `--border` | `#2a2a2a` |
-| `--text-primary` | `#f0f0f0` |
-| `--text-secondary` | `#888888` |
-| `--text-muted` | `#555555` |
-| `--accent` | `#d4d4d4` |
+| `public/assets/kartu.glb` | 3D model for lanyard badge |
+| `public/assets/bandd.png` | Texture for lanyard strap |
+| `public/assets/PP.png` | Profile photo |
+| `public/favicon.ico` | Site favicon |
+| `public/assets/projects/*.svg` | Project thumbnails |
+| `public/assets/certificates/*.svg` | Certificate previews |
 
-Typefaces: **Syne** (400–800) for display/body, **DM Mono** (300–500) for
-labels, nav, and metadata.
+Tech stack logos are loaded from [devicon](https://devicon.dev/) CDN. To use local assets, update `logo_url` paths in `src/data/techStack.ts`.
 
-## Behaviour notes
-
-- **Intro sequencing.** `introPlayed`, `heroPlayed`, and `navbarPlayed` live in
-  `sessionStorage`. The intro plays once per session; a hard reload on `/`
-  clears the flags and replays it. Arriving at `/#portfolio` (the detail page's
-  Back button) skips it entirely.
-- **Reveal delays.** Hero content unblurs at 3.6s, the navbar drops in at 3.8s —
-  both measured from the original.
-- **Navigation.** Anchor clicks run a hand-rolled 1.2s ease-in-out-cubic rAF
-  tween (`src/lib/scroll.ts`); native smooth scroll is too fast for the feel.
-  Scroll spy marks a section active when it crosses the 140px line.
-- **3D lanyard.** A fixed anchor plus three rope-jointed spheres drive a
-  spherical joint on the card; the strap is a `meshline` textured with
-  `bandd.png`. Physics and pointer interaction are skipped below 768px, matching
-  the original.
-- **Mobile.** `useIsMobile` returns `null` on first render so `About` renders
-  nothing during SSR — this is how the original avoids a desktop→mobile flash.
-
-## Data layer
-
-The original reads `projects`, `certificates`, `tech_stack`, and `comments` from
-Supabase. Those tables are not publicly readable, so this clone ships typed
-local seed data with the **same shape** (including the comma-separated
-`technologies` / `key_features` columns the detail page parses).
-
-To wire a real backend, replace the bodies of:
-
-- `src/hooks/usePortfolioData.ts` → `projects` / `certificates` / `techStacks`
-- `src/hooks/useComments.ts` → `addComment` / `likeComment`
-- `src/data/projects.ts` → `getProjectById` (used by the detail route)
-
-Nothing else needs to change.
-
-### Assets
-
-| Path | Source |
-| --- | --- |
-| `public/assets/kartu.glb` | original site (lanyard card model) |
-| `public/assets/bandd.png` | original site (strap texture) |
-| `public/assets/PP.png` | original site (About portrait) |
-| `public/favicon.ico` | original site |
-| `public/assets/projects/*.svg` | generated locally |
-| `public/assets/certificates/*.svg` | generated locally |
-
-Regenerate the placeholders with:
+Generate placeholder images:
 
 ```bash
 node scripts/generate-placeholders.mjs
 ```
 
-Tech-stack logos are loaded from the [devicon](https://devicon.dev/) CDN. Point
-`logo_url` at files under `public/assets/tech/` if you want zero external
-requests.
+## Development notes
 
-## Known deviations
+- **Contact form**: Currently shows local confirmation. For production, connect to an email service or backend API
+- **Image uploads**: Use `URL.createObjectURL` for local preview. Implement cloud storage (e.g., Cloudinary, AWS S3) for persistence
+- **Accessibility**: Enhanced with explicit button types, ARIA labels, and semantic HTML
+- **Performance**: Animations optimized with `willChange`, GPU acceleration, and `viewport: once` to prevent re-triggers
 
-- Contact form and comments have no backend — the form shows a local
-  confirmation, comments live in React state, and uploaded images use
-  `URL.createObjectURL` (they do not persist across reloads).
-- Project/certificate imagery is generated placeholder art.
-- Buttons carry explicit `type`, form fields have `aria-label`s, and the contact
-  fields are wrapped in a real `<form>` — small accessibility additions the
-  original omits.
+## License
+
+Personal portfolio project by Nguyen Do Khai.

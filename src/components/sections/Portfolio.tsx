@@ -85,34 +85,52 @@ export default function Portfolio() {
         </motion.div>
 
         <div className="flex justify-center mb-10">
-          <div className="w-full max-w-3xl rounded-full border border-white/10 bg-white/5 p-2 flex gap-2 backdrop-blur-xl">
-            {TABS.map((tab) => (
-              <button
-                key={tab.key}
-                type="button"
-                onClick={() => {
-                  setActiveTab(tab.key);
-                  if (tab.key !== 'projects') setShowAll(false);
-                }}
-                className={`flex-1 rounded-full py-3 text-sm transition-all duration-300 ${
-                  activeTab === tab.key
-                    ? 'bg-white/10 text-white'
-                    : 'text-white/50 hover:text-white'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
+          <div className="w-full max-w-3xl rounded-full border border-white/10 bg-white/5 p-2 backdrop-blur-xl relative">
+            <div className="flex gap-2 relative z-10">
+              {TABS.map((tab) => (
+                <motion.button
+                  key={tab.key}
+                  type="button"
+                  onClick={() => {
+                    setActiveTab(tab.key);
+                    if (tab.key !== 'projects') setShowAll(false);
+                  }}
+                  className={`flex-1 rounded-full py-3 text-sm transition-colors duration-400 relative ${
+                    activeTab === tab.key
+                      ? 'text-white'
+                      : 'text-white/50 hover:text-white/70'
+                  }`}
+                  whileHover={{ scale: 1.015 }}
+                  whileTap={{ scale: 0.985 }}
+                >
+                  {tab.label}
+                </motion.button>
+              ))}
+            </div>
+            <motion.div
+              className="absolute top-2 bottom-2 rounded-full bg-white/10 pointer-events-none"
+              initial={false}
+              animate={{
+                left: `calc(${TABS.findIndex((t) => t.key === activeTab) * 33.333}% + 8px)`,
+                width: 'calc(33.333% - 16px)',
+              }}
+              transition={{
+                type: 'spring',
+                stiffness: 280,
+                damping: 35,
+                mass: 0.8,
+              }}
+            />
           </div>
         </div>
 
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.45 }}
+            initial={{ opacity: 0, y: 20, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.97, filter: 'blur(8px)' }}
+            transition={{ duration: 0.5, ease: EASE }}
           >
             {activeTab === 'projects' && (
               <div className="space-y-8">
@@ -127,10 +145,10 @@ export default function Portfolio() {
                         <motion.div
                           key={project.id}
                           layout
-                          initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                          initial={{ opacity: 0, y: 30, scale: 0.94 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: -30, scale: 0.95 }}
-                          transition={{ duration: 0.55, delay: index * 0.04, ease: EASE }}
+                          exit={{ opacity: 0, y: 30, scale: 0.94 }}
+                          transition={{ duration: 0.5, delay: index * 0.05, ease: EASE }}
                         >
                           <CardProject
                             id={project.id}
@@ -148,7 +166,7 @@ export default function Portfolio() {
                 {!loading && projects.length > COLLAPSED_PROJECT_COUNT && (
                   <motion.div
                     layout
-                    transition={{ duration: 0.6, ease: EASE }}
+                    transition={{ duration: 0.5, ease: EASE }}
                     className="flex justify-center"
                   >
                     <motion.button
