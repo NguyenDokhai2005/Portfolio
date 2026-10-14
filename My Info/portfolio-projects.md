@@ -10,7 +10,7 @@
 - **Title:** Fullstack Web Developer
 - **Education:** University of Transport Ho Chi Minh City (Đại học Giao thông Vận tải TP.HCM)
 - **Major:** Công nghệ thông tin (Information Technology), Khóa 2023
-- **Certifications:** Binance
+- **Certifications:** Binance Academy × Open Campus — Introduction to EDU Chain & Open Campus (Certificate of Completion)
 - **Email:** nguyendokhai.030105@gmail.com
 - **Phone:** 0987291815
 - **GitHub:** https://github.com/NguyenDokhai2005
@@ -175,6 +175,36 @@ Nền tảng e-commerce hoàn chỉnh với authentication, quản lý sản ph�
 
 ---
 
+## 6. 🚙 AutoRent VN (Car-Rental) — Marketplace Cho Thuê Xe Tự Lái
+
+**Vai trò:** Fullstack Developer + DevOps (dự án cá nhân, làm một mình)
+
+**Mô tả:**
+Nền tảng cho thuê xe tự lái theo mô hình marketplace: chủ xe đăng xe, khách tìm và đặt xe online, quản trị viên duyệt xe và giấy phép lái xe. Chạy trọn luồng thuê xe (giữ chỗ 15 phút → thanh toán tiền thuê + cọc → chủ xe duyệt trong 6 giờ → giao xe → trả xe), tiền được giữ hộ và chỉ ghi nhận cho chủ xe khi cả hai bên xác nhận. Thanh toán hiện là giả lập.
+
+**Tech Stack:**
+- Frontend: Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS 4
+- Backend: NestJS 11, Prisma 6, PostgreSQL 16
+- Hạ tầng: Docker Compose, Nginx (reverse proxy, HTTPS), GitHub Actions với self-hosted runner
+- Testing: Jest + Supertest (API), Vitest (web), Playwright (E2E)
+
+**Điểm nổi bật:**
+- Chống trùng lịch bằng exclusion constraint của PostgreSQL (`EXCLUDE USING gist`) — request đồng thời trả 409
+- Chuyển trạng thái đơn an toàn khi tranh chấp bằng `UPDATE` có điều kiện, idempotent
+- Giữ chỗ có thời hạn bằng cột `expires_at` + job mỗi phút, không cần Redis
+- Ảnh giấy phép lái xe lưu riêng, chỉ trả qua API, mọi lần đọc đều ghi log
+- Ảnh upload được vẽ lại thành WebP, loại bỏ EXIF/GPS
+- Access token 15 phút trong bộ nhớ + refresh token httpOnly xoay vòng, mật khẩu argon2id
+- Test tự liệt kê toàn bộ route để kiểm tra phân quyền
+- CI mỗi PR, CD tự động deploy song song lên hai máy chủ (VMware + cloud)
+
+**Giới hạn hiện tại:** thanh toán giả lập, chưa có đặt lại mật khẩu, đánh giá, chat, bản đồ.
+
+**Links:**
+- 💻 [GitHub](https://github.com/NguyenDokhai2005/Car-Rental)
+
+---
+
 # 📋 Gợi ý sắp xếp trên Portfolio
 
 **Thứ tự đề xuất (từ mạnh nhất):**
@@ -182,10 +212,11 @@ Nền tảng e-commerce hoàn chỉnh với authentication, quản lý sản ph�
 | # | Dự án | Lý do |
 |---|---|---|
 | 1 | **AI-WorkFlow** | Dự án "Hero" — phức tạp nhất, có demo live, technical depth cao |
-| 2 | **Cedra-Pocket** | Blockchain + Team Leader — thể hiện leadership + emerging tech |
-| 3 | **Expense Management** | Mobile + OCR — thể hiện versatility, giải quyết vấn đề thật |
-| 4 | **SoftStore** | Fullstack proof — CRUD + database |
-| 5 | **DashBoard-Rental-Car** | Bonus — UI/UX skill |
+| 2 | **AutoRent VN** | Fullstack + DevOps trọn vẹn — CSDL, API, CI/CD, deploy 2 server |
+| 3 | **Cedra-Pocket** | Blockchain + Team Leader — thể hiện leadership + emerging tech |
+| 4 | **Expense Management** | Mobile + OCR — thể hiện versatility, giải quyết vấn đề thật |
+| 5 | **SoftStore** | Fullstack proof — CRUD + database |
+| 6 | **DashBoard-Rental-Car** | Bonus — UI/UX skill |
 
 ---
 

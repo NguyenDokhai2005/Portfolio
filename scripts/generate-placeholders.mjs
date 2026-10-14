@@ -13,15 +13,12 @@ const publicDir = join(here, '..', 'public', 'assets');
 const OWNER = 'Nguyen Do Khai';
 
 const projects = [
-  { file: 'project-ai-workflow.svg', label: 'AI-WorkFlow', sub: 'Workflow Automation Platform', from: '#1b2440', to: '#070a14', accent: '#7c8cff' },
-  { file: 'project-cedra-pocket.svg', label: 'Cedra-Pocket', sub: 'Blockchain Telegram Mini App', from: '#2a2413', to: '#0d0b05', accent: '#f0b429' },
   { file: 'project-expense.svg', label: 'Expense', sub: 'Personal Finance · OCR', from: '#0f2a1f', to: '#04100b', accent: '#34d399' },
   { file: 'project-softstore.svg', label: 'SoftStore', sub: 'E-commerce Platform', from: '#2b1520', to: '#12060b', accent: '#fb7185' },
   { file: 'project-rental-car.svg', label: 'Rental Car', sub: 'Management Dashboard', from: '#0f2a2a', to: '#04100f', accent: '#2dd4bf' },
 ];
 
 const certificates = [
-  { file: 'certificate-binance.svg', title: 'Binance', accent: '#f0b429' },
 ];
 
 const escape = (value) =>

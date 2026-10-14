@@ -17,11 +17,30 @@ export const projects: Project[] = [
       'React 19, ReactFlow, Tailwind CSS, Framer Motion, Supabase, Gmail OAuth, Vercel',
     key_features:
       'Infinite canvas on a 24px dot grid, 5 Pillars architecture: Research → Code → Marketing → Imagine → Video, Glassmorphism nodes with animated neon edges, Execution engine using DFS traversal, Modular node registry for adding new node types, Custom rendering pipeline and lazy loading to keep the canvas smooth under many nodes',
-    image_url: '/assets/projects/project-ai-workflow.svg',
-    image_urls: ['/assets/projects/project-ai-workflow.svg'],
+    image_url: '/assets/projects/ai-workflow-cover.webp',
+    image_urls: [
+      '/assets/projects/ai-workflow-cover.webp',
+      '/assets/projects/ai-workflow-editor.webp',
+      '/assets/projects/ai-workflow-canvas-preview.webp',
+    ],
     live_url: 'https://ai-work-flow-khaki.vercel.app/#/',
     github_url: 'https://github.com/NguyenDokhai2005/Font-end-Auto-Office',
     created_at: '2026-01-05T00:00:00.000Z',
+  },
+  {
+    id: '6',
+    title: 'AutoRent VN — Peer-to-Peer Car Rental Marketplace',
+    description:
+      'A self-drive car rental marketplace: owners list their cars, renters search and book online, and admins review vehicles and driving licences. Covers the full rental flow from a 15-minute hold through payment, owner approval, handover and return, with funds held in escrow until both sides confirm. Built solo end to end — database, API, interface, servers and CI/CD. Payments are simulated; no real money moves.',
+    technologies:
+      'Next.js 15, React 19, Tailwind CSS 4, NestJS 11, Prisma 6, PostgreSQL 16, Docker Compose, Nginx, GitHub Actions, Jest, Vitest, Playwright',
+    key_features:
+      'Three roles — renter, owner and admin — with ownership checks on every endpoint, Double booking blocked by a PostgreSQL exclusion constraint so concurrent requests on the same car return 409, Race-safe booking state transitions using conditional UPDATEs so payments are never counted twice, Escrow flow: owner is credited only when both sides confirm handover and return, Tiered cancellation refunds and automatic full refund if the owner does not respond within 6 hours, Time-limited holds via an expires_at column and a per-minute job — no Redis, Driving licence images kept in private storage served only through the API with every read logged, Uploads re-encoded to WebP to validate files and strip EXIF and GPS data, 15-minute in-memory access token plus rotating httpOnly refresh cookie and argon2id passwords, CI on every PR and automatic deploy to two independent servers on merge to main',
+    image_url: '/assets/projects/autorent-cover.webp',
+    image_urls: ['/assets/projects/autorent-cover.webp', '/assets/projects/autorent-home.webp'],
+    live_url: '',
+    github_url: 'https://github.com/NguyenDokhai2005/Car-Rental',
+    created_at: '2026-10-01T00:00:00.000Z',
   },
   {
     id: '2',
@@ -32,8 +51,13 @@ export const projects: Project[] = [
       'Next.js 16, React 19, Zustand, Tailwind CSS, NestJS 10, PostgreSQL, Prisma, Move, Cedra Network',
     key_features:
       'Team Leader of 3 and smart contract developer, Non-custodial wallet — the user keeps their private key, Ed25519 signature verification, 6-tier ranking system from Bronze to Leviathan, On-chain reward distribution, Pet system with mining rewards, Custom wallet flow bridging Telegram Mini App and chain',
-    image_url: '/assets/projects/project-cedra-pocket.svg',
-    image_urls: ['/assets/projects/project-cedra-pocket.svg'],
+    image_url: '/assets/projects/cedra-pocket-cover.webp',
+    image_urls: [
+      '/assets/projects/cedra-pocket-cover.webp',
+      '/assets/projects/cedra-pocket-home.webp',
+      '/assets/projects/cedra-pocket-games.webp',
+      '/assets/projects/cedra-pocket-pet.webp',
+    ],
     live_url: '',
     github_url: 'https://github.com/Cedra-Pocket/Cedra-Pocket',
     created_at: '2025-11-18T00:00:00.000Z',

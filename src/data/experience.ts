@@ -57,6 +57,6 @@ export const experience: ExperienceItem[] = [
     period: '2023 — Present',
     kind: 'education',
     summary: 'Undergraduate programme in Information Technology, intake 2023.',
-    highlights: ['Binance certified'],
+    highlights: ['Binance Academy course: Introduction to EDU Chain & Open Campus'],
   },
 ];
