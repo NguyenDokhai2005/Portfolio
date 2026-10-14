@@ -12,11 +12,11 @@ export const projects: Project[] = [
     id: '1',
     title: 'AI-WorkFlow — Workflow Automation Platform',
     description:
-      'A visual automation platform where AI nodes (Research, Code, Marketing, Imagine, Video) are dragged onto an infinite canvas and wired into an executable pipeline. Styled after Figma Weave with a glassmorphism interface. Built as a fullstack developer: React 19 and ReactFlow on the front, Supabase and Gmail OAuth behind it.',
+      'A visual automation platform where AI nodes (Research, Code, Marketing, Imagine, Video) are dragged onto an infinite canvas and wired into an executable pipeline. Styled after Figma Weave with a glassmorphism interface. Team of two; I led the project and owned the backend — Supabase and Gmail OAuth — behind a React 19 and ReactFlow front end.',
     technologies:
       'React 19, ReactFlow, Tailwind CSS, Framer Motion, Supabase, Gmail OAuth, Vercel',
     key_features:
-      'Infinite canvas on a 24px dot grid, 5 Pillars architecture: Research → Code → Marketing → Imagine → Video, Glassmorphism nodes with animated neon edges, Execution engine using DFS traversal, Modular node registry for adding new node types, Custom rendering pipeline and lazy loading to keep the canvas smooth under many nodes',
+      'Team Leader of 2, owning the backend on Supabase with Gmail OAuth, Infinite canvas on a 24px dot grid, 5 Pillars architecture: Research → Code → Marketing → Imagine → Video, Glassmorphism nodes with animated neon edges, Execution engine using DFS traversal, Modular node registry for adding new node types, Custom rendering pipeline and lazy loading to keep the canvas smooth under many nodes',
     image_url: '/assets/projects/ai-workflow-cover.webp',
     image_urls: [
       '/assets/projects/ai-workflow-cover.webp',
@@ -24,7 +24,7 @@ export const projects: Project[] = [
       '/assets/projects/ai-workflow-canvas-preview.webp',
     ],
     live_url: 'https://ai-work-flow-khaki.vercel.app/#/',
-    github_url: 'https://github.com/NguyenDokhai2005/Font-end-Auto-Office',
+    github_url: '',
     created_at: '2026-01-05T00:00:00.000Z',
   },
   {

@@ -21,7 +21,7 @@ export const profile = {
     '↗ open to internship & full-time opportunities',
   ],
   aboutDescription:
-    'Information Technology student at University of Transport Ho Chi Minh City, intake 2023, working as a fullstack web developer. I have led two team projects and built across React, Next.js, NestJS, PostgreSQL and Move smart contracts — covering web, mobile and on-chain.',
+    'Information Technology student at University of Transport Ho Chi Minh City, intake 2023, working as a fullstack web developer. I have led three team projects and built across React, Next.js, NestJS, PostgreSQL and Move smart contracts — covering web, mobile and on-chain.',
   aboutQuote: '“From idea to shipped product — clean architecture, real problems, working software.”',
   avatar: '/assets/PP.png',
   /**

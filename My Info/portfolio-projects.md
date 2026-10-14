@@ -20,7 +20,9 @@
 
 ## 1. 🏆 AI-WorkFlow — Workflow Automation Platform
 
-**Vai trò:** Fullstack Developer
+**Vai trò:** **Team Leader** + Backend Developer
+
+**Team:** 2 thành viên — Crust là Leader, phụ trách Backend (Supabase, Gmail OAuth)
 
 **Mô tả:**
 Nền tảng automation workflow dạng visual builder, cho phép người dùng kéo thả các node AI (Research, Code, Marketing, Imagine, Video) lên canvas vô hạn và kết nối chúng thành pipeline xử lý tự động. Thiết kế theo phong cách Figma Weave với glassmorphism UI.
@@ -146,7 +148,7 @@ Dashboard quản lý hệ thống cho thuê xe, xây dựng hoàn toàn bằng v
 
 ## 5. 🛒 SoftStore — Nền tảng E-commerce
 
-**Vai trò:** Fullstack Developer
+**Vai trò:** Fullstack Developer (làm một mình)
 
 **Mô tả:**
 Nền tảng e-commerce hoàn chỉnh với authentication, quản lý sản phẩm, đơn hàng, và hệ thống chat realtime bằng WebSocket. Frontend React kết nối backend NestJS + PostgreSQL, hỗ trợ thanh toán MoMo/banking.

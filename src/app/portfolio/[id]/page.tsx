@@ -259,12 +259,7 @@ export default function ProjectDetailPage() {
                   <GitBranch size={14} />
                   Github
                 </a>
-              ) : (
-                <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#101010] border border-white/10 text-white/40 text-sm">
-                  <GitBranch size={14} />
-                  No Link
-                </div>
-              )}
+              ) : null}
             </motion.div>
 
             <motion.div

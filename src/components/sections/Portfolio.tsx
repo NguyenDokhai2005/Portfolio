@@ -5,8 +5,8 @@ import { ChevronDown, ChevronUp, X } from 'lucide-react';
 import { useState } from 'react';
 
 import CardCertificate from '@/components/portfolio/CardCertificate';
-import CardExperience from '@/components/portfolio/CardExperience';
 import CardProject from '@/components/portfolio/CardProject';
+import ExperienceBento from '@/components/portfolio/ExperienceBento';
 import { experience } from '@/data/experience';
 import { usePortfolioData } from '@/hooks/usePortfolioData';
 import { EASE } from '@/lib/motion';
@@ -222,11 +222,7 @@ export default function Portfolio() {
 
             {activeTab === 'experience' && (
               <div className="min-h-[360px] flex justify-center">
-                <div className="grid md:grid-cols-2 gap-6 max-w-5xl w-full px-1">
-                  {experience.map((item, index) => (
-                    <CardExperience key={item.id} index={index} {...item} />
-                  ))}
-                </div>
+                <ExperienceBento items={experience} />
               </div>
             )}
           </motion.div>

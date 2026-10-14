@@ -56,6 +56,10 @@ export interface ExperienceItem {
   kind: 'leadership' | 'development' | 'education';
   summary: string;
   highlights: string[];
+  /** Headcount including me. Set on team roles only; drives the team dots. */
+  teamSize?: number;
+  /** Ids from `projects.ts` this entry links to, in display order. */
+  projectIds?: string[];
 }
 
 export type PortfolioTab = 'projects' | 'certificates' | 'experience';

@@ -1,13 +1,13 @@
 import type { ExperienceItem } from '@/types';
 
 /**
- * Every entry is drawn from a fact stated in `My Info/portfolio-projects.md` —
- * the two team-leader roles, the self-directed builds and the degree. No
- * employment history is listed because none is recorded there; add internship or
- * job entries here as they happen.
+ * Every entry is drawn from a fact stated in `My Info/portfolio-projects.md` or
+ * confirmed by the owner — the three team-leader roles, the solo builds and the
+ * degree. No employment history is listed because none exists yet; add
+ * internship or job entries here as they happen.
  *
- * `period` is deliberately absent from the role entries: the source file gives no
- * dates for them, and the `created_at` values in `projects.ts` were seeded for
+ * `period` is deliberately absent from the role entries: no dates are recorded
+ * for them, and the `created_at` values in `projects.ts` were seeded for
  * ordering, not sourced from reality.
  */
 export const experience: ExperienceItem[] = [
@@ -16,6 +16,8 @@ export const experience: ExperienceItem[] = [
     role: 'Team Leader & Smart Contract Developer',
     organization: 'Cedra-Pocket',
     kind: 'leadership',
+    teamSize: 3,
+    projectIds: ['2'],
     summary:
       'Led a three-person team building a Telegram Mini App on the Cedra Network, and owned the Move smart contracts behind its on-chain rewards.',
     highlights: [
@@ -25,10 +27,27 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
+    id: 'exp-05',
+    role: 'Team Leader & Backend Developer',
+    organization: 'AI-WorkFlow',
+    kind: 'leadership',
+    teamSize: 2,
+    projectIds: ['1'],
+    summary:
+      'Led a two-person team on a visual AI workflow builder and owned its backend.',
+    highlights: [
+      'Split the work between front end and back end across a team of two',
+      'Built the backend on Supabase, including Gmail OAuth',
+      'Shipped live on Vercel',
+    ],
+  },
+  {
     id: 'exp-02',
     role: 'Team Leader & Frontend Developer',
     organization: 'Expense Management',
     kind: 'leadership',
+    teamSize: 5,
+    projectIds: ['3'],
     summary:
       'Led a five-person team on an offline-first Android expense tracker and built its analytics dashboard.',
     highlights: [
@@ -40,14 +59,14 @@ export const experience: ExperienceItem[] = [
   {
     id: 'exp-03',
     role: 'Fullstack Web Developer',
-    organization: 'Self-directed projects',
+    organization: 'Solo projects',
     kind: 'development',
+    projectIds: ['6', '4'],
     summary:
-      'Designed and shipped complete web products solo, from interface through to database.',
+      'Built fullstack web products on my own, end to end — interface, API and database.',
     highlights: [
-      'AI-WorkFlow — visual automation builder on React 19 and ReactFlow, deployed live',
+      'AutoRent VN — car rental marketplace on Next.js, NestJS and PostgreSQL, with CI/CD deploying to two servers',
       'SoftStore — NestJS and PostgreSQL commerce platform with realtime chat over WebSocket',
-      'DashBoard-Rental-Car — management dashboard in vanilla JavaScript, no framework',
     ],
   },
   {
@@ -57,6 +76,6 @@ export const experience: ExperienceItem[] = [
     period: '2023 — Present',
     kind: 'education',
     summary: 'Undergraduate programme in Information Technology, intake 2023.',
-    highlights: ['Binance Academy course: Introduction to EDU Chain & Open Campus'],
+    highlights: [],
   },
 ];
